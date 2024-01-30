@@ -4,30 +4,53 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
   <meta http-equiv='X-UA-Compatible' content='ie=edge'/>
   <title>Document</title>
-  <script src='js/index.js'></script>
+  
   <link rel='stylesheet' href='index.css'/>
 </head>
 <body>
   <div id='main'>
 
-    <h2>GitHub Search</h2>
+    <h2>FLATDANGO</h2>
+
 
     <form id='github-form'>
-      <input id='search' type='text' name='search'>
+      <input id='search' placeholder="Search" type='text' name='search'>
       <input type='submit' name='submit'/>
     </form>
 
-    <div id='github-container'>
-      <ul id='user-list'>
+    <div id='github-container' class="container">
+      <div class="movies menu">
+        <ul id='user-list' class="filmlist">
+          <li class="film item"></li>
+        </ul>
+      </div>
 
-      </ul>
+
+
+    <img 
+      id="poster" 
+      alt="Movie Poster" 
+      src="https://www.gstatic.com/tv/thumb/v22vodart/45367/p45367_v_v8_aa.jpg"
+      />
+
+
+
+      <form>
+        <div class="title"><strong>Title:</strong> <span id="title"></span></div>
+        <div class="Runtime"><strong>Runtime:</strong> <span id="runtime"></span>minutes</div>
+        <div class="Showtime"><strong>Showtime:</strong> <span id="showtime"></span></div>
+        <div class="Available Tickets"><strong>Available Tickets:</strong> <span id="availabletickets"></span></div>
+        <button id="buyticket">Buy Ticket</button>
+    </div>
+    </div>
+  </form>
 
       <ul id='repos-list'>
-
+      
       </ul>
     </div>
 
   </div>
-
+<script src="js/index.js"></script>
 </body>
 </html>

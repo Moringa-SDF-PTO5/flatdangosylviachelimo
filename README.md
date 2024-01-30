@@ -1,74 +1,161 @@
-# GitHub Search App
+# Flatdango
 
-## Learning Goals
+Flatiron Movie Theater is open for business! You will be building out an
+application, Flatdango, that allows a user to purchase movie tickets from the
+theater.
 
-- Practice accessing information from APIs and using it to update the DOM
-- Practice listening for user events and updating the DOM in response
+## Setup
 
-## Instructions
+Run this command to get the backend started:
 
-You will be using the GitHub API for this project. You can view documentation
-for this API [here](https://developer.github.com/v3/). This is an open API: no
-API key or authentication is required for the endpoints we will be using.
-
-Notice the GitHub API documentation includes the following excerpt:
-
-> By default, all requests to <https://api.github.com> receive the v3 version of
-> the REST API. We encourage you to explicitly request this version via the
-> Accept header.
-
-They require you to add a custom header to your requests:
-
-```text
-Accept: application/vnd.github.v3+json
+```console
+$ json-server --watch db.json
 ```
 
-### [User Search Endpoint](https://developer.github.com/v3/search/#search-users)
+Test your server by visiting this route in the browser:
 
-You can search for users matching a certain name. For example, if we wanted to
-find all users named `octocat`, we would make a `GET` request to
-`https://api.github.com/search/users?q=octocat`. To view the response, you can
-copy and paste that URL into your browser.
+[http://localhost:3000/films](http://localhost:3000/films)
 
-This endpoint is rate limited. This means the API will stop returning data if
-you make more than
-[10 requests per minute](https://developer.github.com/v3/search/#rate-limit).
+Then, open the `index.html` file on your browser to run the application.
 
-### [User Repos Endpoint](https://developer.github.com/v3/repos/#list-user-repositories)
+Write your code in the `js/index.js` file. The base URL for your API will be
+[http://localhost:3000](http://localhost:3000).
 
-You can find all the public repositories for a user using this endpoint. For
-example if we wanted to find all the repositories for a user with GitHub
-username `octocat`, we would make a `GET` request to
-`https://api.github.com/users/octocat/repos`. To view the response, you can copy
-and paste that URL into your browser.
+## Core Deliverables
 
-This endpoint is rate limited. This endpoint will stop returning data if you
-make more than
-[60 requests in an hour](https://developer.github.com/v3/#rate-limiting).
+As a user, I can:
 
-## Deliverables
+1. See the first movie's details, including its **poster, title, runtime,
+   showtime, and available tickets** when the page loads. The number of
+   available tickets will need to be derived by subtracting the number of
+   `tickets_sold` from the theater's `capacity`. You will need to make a GET
+   request to the following endpoint to retrieve the film data:
 
-You are going to build a JavaScript application which searches GitHub for users
-by name and displays the results on the screen. Clicking on a specific user will
-show all the repositories for that user.
+   ```txt
+   GET /films/1
 
-1. The `index.html` file has a form with a search input. When the form is
-   submitted, it should take the value of the input and search GitHub for user
-   matches using the [User Search Endpoint](#user-search-endpoint).
-2. Using the results of the search, display information about the users to the
-   page. (You might include showing their username, avatar and a link to their
-   profile.)
-3. Clicking on one of these users should send a request to the
-   [User Repos Endpoint](#user-repos-endpoint) and return data about all the
-   repositories for that user.
-4. Using the response from the Users Repos Endpoint, display all the
-   repositories for that user on the page.
+   Example Response:
+   {
+     "id": "1",
+     "title": "The Giant Gila Monster",
+     "runtime": "108",
+     "capacity": 30,
+     "showtime": "04:00PM",
+     "tickets_sold": 27,
+     "description": "A giant lizard terrorizes a rural Texas community and a heroic teenager attempts to destroy the creature.",
+     "poster": "https://www.gstatic.com/tv/thumb/v22vodart/2157/p2157_v_v8_ab.jpg"
+   }
+   ```
 
-## Bonus
+2. See a menu of all movies on the left side of the page in the `ul#films`
+   element when the page loads. (_optional_: you can style each film in the list
+   by adding the classes `film item` to each `li` element.) There is a
+   placeholder `li` in the `ul#films` element that is hardcoded in the HTML —
+   feel free to remove that element by editing the HTML file directly, or use
+   JavaScript to remove the placeholder element before populating the list. You
+   will need to make a GET request to the following endpoint to retrieve the
+   film data:
 
-- Toggle the search bar between searching for users by keyword and searching for
-  repos by keyword by adding an extra button. Hint: you can use the same search
-  bar for this, but you may need to create a variable which stores what the
-  current search type is (user or repo). The endpoint to search repositories by
-  keyword is
-  [here](https://developer.github.com/v3/search/#search-repositories).
+   ```txt
+   GET /films
+
+   Example response:
+   [
+      {
+        "id": "1",
+        "title": "The Giant Gila Monster",
+        "runtime": "108",
+        "capacity": 30,
+        "showtime": "04:00PM",
+        "tickets_sold": 27,
+        "description": "A giant lizard terrorizes a rural Texas community and a heroic teenager attempts to destroy the creature.",
+        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/2157/p2157_v_v8_ab.jpg"
+      },
+      {
+        "id": "2",
+        "title": "Manos: The Hands Of Fate",
+        "runtime": "118",
+        "capacity": 50,
+        "showtime": "06:45PM",
+        "tickets_sold": 44,
+        "description": "A family gets lost on the road and stumbles upon a hidden, underground, devil-worshiping cult led by the fearsome Master and his servant Torgo.",
+        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/47781/p47781_v_v8_ac.jpg"
+      }
+   ]
+   ```
+
+3. Buy a ticket for a movie. After clicking the "Buy Ticket" button, I should
+   see the number of available tickets decreasing on the frontend. I should not
+   be able to buy a ticket if the showing is sold out (if there are 0 tickets
+   available). **No persistence is needed for this feature**.
+
+### Bonus Deliverables
+
+These bonus deliverables are here if you want an extra challenge and won't
+affect your score. **Make sure to commit your work to save your progress before
+attempting the bonus deliverables!**
+
+1. Click on a movie in the menu to replace the currently displayed movie's
+   details with the new movie's details. Note that you may have to make an
+   additional GET request to access the movie's details.
+
+2. When a movie is sold out (when there are no available tickets remaining),
+   indicate that the movie is sold out by changing the button text to "Sold
+   Out". Also update the film item in the `ul#films` menu by adding a class of
+   `sold-out` to the film. For reference, here's what the contents of the
+   `ul#films` element should look like with a sold out film:
+
+   ```html
+   <li class="film item">(Title of film)</li>
+   <li class="sold-out film item">(Title of a sold-out film)</li>
+   <li class="film item">(Title of film)</div>
+   ```
+
+## Extra Bonus
+
+These extra bonus deliverables involve using `fetch` to update data on the
+`json-server` backend by using `POST`, `PATCH`, and `DELETE` requests. These are
+meant for an extra, extra challenge and won't affect your grade. **Make sure to
+commit your work to save your progress before attempting the extra bonus
+deliverables!**
+
+1. When a ticket is purchased, persist the updated number of `tickets_sold` on
+   the server. Remember, the frontend shows the number of available tickets
+   based on the `tickets_sold` and the `capacity`, so only the `tickets_sold`
+   should be updated on the backend when a ticket is purchased. You will need to
+   make a request that follows this structure:
+
+   ```txt
+   PATCH /films/:id
+
+   Request Headers: {
+     Content-Type: application/json
+   }
+
+   Request Body: {
+     "tickets_sold": 28
+   }
+   ----
+   Example Response:
+   {
+      "id": "1",
+      "title": "The Giant Gila Monster",
+      "runtime": "108",
+      "capacity": 30,
+      "showtime": "04:00PM",
+      "tickets_sold": 28,
+      "description": "A giant lizard terrorizes a rural Texas community and a heroic teenager attempts to destroy the creature.",
+      "poster": "https://www.gstatic.com/tv/thumb/v22vodart/2157/p2157_v_v8_ab.jpg"
+   }
+   ```
+
+2. Delete a film from the server. Add a delete button next to each film in the
+   `ul#films` menu. When the button is clicked, remove the film from the list
+   and also delete the film on the server:
+
+   ```txt
+   DELETE /films/:id
+
+   Example Response:
+   {}
+   ```

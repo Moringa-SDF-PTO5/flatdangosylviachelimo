@@ -2,6 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0;
+  color: whitesmoke;
+
+}
+body {
+  background-color: rgb(1, 1, 43);
+}
+h2 {
+  font-size: 40px;
+  font-family: sans-serif;
 }
 
 #github-container {
@@ -10,4 +20,62 @@
 
 ul {
   list-style: none;
+}
+#github-form {
+  padding: 0.5rem 1rem;
+border-radius: 50px;
+border: 2px solid #22254b;
+background-color: black;
+font-family: inherit;
+color: #eee;
+font-size: 1rem;
+}
+.search::placeholder {
+  color: #afb2dc;
+}
+img {
+  width: 250;
+  height: 250;
+  float: left;
+}
+#infobox {
+background-color: rgb(38, 38, 43);
+width: 150;
+height: 150;
+color: whitesmoke;
+padding: 20px;
+line-height: 1.8;
+}
+#githubform {
+  float: left;
+
+}
+button{
+  background-color: rgb(219, 147, 13);
+}
+#movie {
+  float: right;
+  padding-bottom: 2px;
+  padding-top: 200px;
+}
+#userlist {
+  list-style-type: circle;
+  padding: 0;
+}
+li {
+  cursor: pointer;
+  padding-top: 10px;
+  position: top;
+  margin-bottom: 10;
+  text-align: start;
+  position: relative;
+  color: whitesmoke;
+  color: whitesmoke;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 300;
+  font-size: larger;
+}
+#poster {
+  width: 400;
+  height: 400;
 }
